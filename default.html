@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+{% load i18n srprsme_filters capture %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+    {% include 'scripts/vwo.html' %}
+    {% include 'scripts/css.html' %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-title" content="" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-TileImage" content="{% static 'icons/windows-icon.png' %}" />
+    <meta name="msapplication-TileColor" content="#4fca96" />
+    <meta name="author" content="srprs.me" />
+    <meta property="fb:admins" content="100001832405717" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="srprs.me"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+
+    {% block title %}
+    <title>
+        srprs.me{% if page.title %} - {{ page.title }}{% else %}{% endif %}
+    </title>
+    <meta property="og:title" content="srprs.me" />
+    {% endblock %}
+
+    {% block extra_meta_tags %}
+    <meta property="og:description" content="srprs.me, een nieuw reisbureau waar je reist met je bestemming als verrassing" />
+    <meta name="description" content="srprs.me, een nieuw reisbureau waar je reist met je bestemming als verrassing" />
+    <meta property="og:image" content="https://srprs.me{% static 'images/srprsme.jpg' %}" />
+    {% endblock %}
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="{% static 'icons/favicon_orange.ico' %}" />
+    <link rel="apple-touch-icon-precomposed" href="{% static 'icons/apple-icon.png' %}" />
+
+    {% include 'scripts/javascripts.html' %}
+</head>
+<body class="{% block body_class %}home{% endblock %}">
+    <div id="fb-root"></div>
+    {% block header %}{% include 'components/header/header.html' %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% footer %}{% endblock %}
+
+    {% include 'components/lightboxes/login_form.html' %}
+
+    {% include 'scripts/base.html' %}
+
+    {% if view.show_critical and not 'DEBUG'|setting %}
+        <link href="{% static 'css/application.min.css' %}" rel="stylesheet">
+    {% endif %}
+
+    <div data-id="18caebfe8f" class="livechat_button"><a href="http://www.livechatinc.com/customer-service/?partner=lc_6490471&amp;utm_source=chat_button"></a></div>
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</body>
+</html>
